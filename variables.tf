@@ -15,7 +15,7 @@ variable "public_subnet3_name" {}
 variable Main_Routing_Table {}
 variable "azs" {
   description = "Run the EC2 Instances in these Availability Zones"
-  default = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  default = ["us-east-2a", "us-east-2b", "us-east-2c"]
 }
 variable "environment" { default = "dev" }
 variable "instance_type" {}
