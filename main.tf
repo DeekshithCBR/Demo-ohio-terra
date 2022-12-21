@@ -135,29 +135,4 @@ resource "aws_lb_listener" "DeekshithLBListener" {
   }
 }
 
-resource "aws_launch_configuration" "DeekshithLConf" {
-  name_prefix   = "DeekshtihLaunchConfig"
-  image_id      =  "${var.amis}"
-  instance_type = "t2.micro"
-  key_name = "FinalProject"
-  security_groups = ["${aws_security_group.allow_all.id}"]
-  associate_public_ip_address = true	
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-resource "aws_autoscaling_group" "DeekshithASG" {
-  name                 = "DeekshithAutoScalingGroup"
-  launch_configuration = aws_launch_configuration.DeekshithLConf.name
-  vpc_zone_identifier = [ "${aws_subnet.subnet1-public.id}", "${aws_subnet.subnet2-public.id}", "${aws_subnet.subnet3-public.id}"]
-  min_size             = 2
-  max_size             = 4
-  health_check_type = "EC2"
-  #availability_zones = [ "us-east-1a","us-east-1b","us-east-1c" ]
-  target_group_arns = ["${aws_lb_target_group.WEBTG.arn}"]
-  lifecycle {
-    create_before_destroy = true
-  }
-}
 
